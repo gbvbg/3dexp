@@ -1,0 +1,72 @@
+---
+force_db_creation: false
+
+x3d_passport_db: passdb
+x3d_passport_user_login: x3dpass
+x3d_passport_admin_login: x3dpassadmin
+x3d_passport_user: "{{ x3d_passport_user_login }}"
+x3d_passport_admin: "{{ x3d_passport_admin_login }}"
+x3d_passport_schema: "{{ x3d_passport_db }}"
+x3d_passport_user_password: 'Passport#1'
+x3d_passport_admin_password: "{{ x3d_passport_user_password }}"
+
+x3d_passport_tokens_db: passtkdb
+x3d_passport_tokens_schema: "{{ x3d_passport_tokens_db }}"
+x3d_passport_tokens_login: x3dpasstokens
+x3d_passport_tokens_user: "{{ x3d_passport_tokens_login }}"
+x3d_passport_tokens_user_password: 'Passport#1'
+
+x3d_dashboard_db: dashdb
+x3d_dashboard_user_login: x3ddash
+x3d_dashboard_admin_login: x3ddashadmin
+x3d_dashboard_user: "{{ x3d_dashboard_user_login }}"
+x3d_dashboard_admin: "{{ x3d_dashboard_admin_login }}"
+x3d_dashboard_user_password: 'Passport#1'
+x3d_dashboard_admin_password: "{{ x3d_dashboard_user_password }}"
+x3d_dashboard_schema: "{{ x3d_dashboard_db }}"
+
+x3d_space_db: spacedb
+x3d_space_db_file_path: 'C:\DassaultSystemes\3DEXP_DB'
+x3d_space_db_file_size: 500MB
+x3d_space_db_file_growth: 10MB
+x3d_space_db_log_size: 100MB
+x3d_space_db_login: m1
+x3d_space_db_user: "{{ x3d_space_db_login }}"
+x3d_space_db_user_password: 'Passport#1'
+x3d_space_db_schema: "{{ x3d_space_db }}"
+
+x3d_comment_db: x3dcomment
+x3d_comment_user_login: x3ds
+x3d_comment_admin_login: x3ds_admin
+x3d_comment_user_password: 'Passport#1'
+x3d_comment_admin_password: "{{ x3d_comment_user_password }}"
+x3d_comment_user: "{{ x3d_comment_user_login }}"
+x3d_comment_admin: "{{ x3d_comment_admin_login }}"
+x3d_comment_schema: "{{ x3d_comment_db }}"
+
+x3d_notification_db: x3dnotification
+x3d_notification_user_login: x3ds
+x3d_notification_admin_login: x3ds_admin
+x3d_notification_user_password: 'Passport#1'
+x3d_notification_admin_password: "{{ x3d_notification_user_password }}"
+x3d_notification_user: "{{ x3d_notification_user_login }}"
+x3d_notification_admin: "{{ x3d_notification_admin_login }}"
+x3d_notification_schema: "{{ x3d_notification_db }}"
+
+
+
+x3d_swym_social_db: x3dswym_social
+x3d_swym_social_schema: "{{ x3d_swym_social_db }}"
+
+x3d_swym_media_db: x3dswym_media
+x3d_swym_media_schema: "{{ x3d_swym_media_db }}"
+
+x3d_swym_widget_db: x3dswym_widget
+x3d_swym_widget_schema: "{{ x3d_swym_widget_db }}"
+
+x3d_swym_user_login: x3ds
+x3d_swym_admin_login: x3ds_admin
+x3d_swym_user_password: 'Passport#1'
+x3d_swym_admin_password: "{{ x3d_swym_user_password }}"
+x3d_swym_user: "{{ x3d_swym_user_login }}"
+x3d_swym_admin: "{{ x3d_swym_admin_login }}"

@@ -1,0 +1,36 @@
+---
+- hosts: database
+  gather_facts: False
+  roles:
+    - role: x3d_database
+      vars:
+        service: passport
+      tags: create_passport_db
+    - role: x3d_database
+      vars:
+        service: passport_tokens
+      tags: create_passport_tokens_db
+    - role: x3d_database
+      vars:
+        service: dashboard
+    - role: x3d_database
+      vars:
+        service: space
+      tags: create_space_db
+    - role: x3d_database
+      vars:
+        service: notification
+    - role: x3d_database
+      vars:
+        service: comment
+    # should be first of three of swym databases.
+    # swym_social creates logins used in all dbs.
+    - role: x3d_database
+      vars:
+        service: swym_social
+    - role: x3d_database
+      vars:
+        service: swym_media
+    - role: x3d_database
+      vars:
+        service: swym_widget

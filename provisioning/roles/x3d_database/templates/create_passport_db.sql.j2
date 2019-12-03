@@ -1,0 +1,28 @@
+USE master;
+GO
+-- Create database
+CREATE DATABASE {{ x3d_passport_db }} COLLATE SQL_Latin1_General_CP1_CI_AS;
+GO
+-- Minimizing deadlock potential
+ALTER DATABASE {{ x3d_passport_db }} SET READ_COMMITTED_SNAPSHOT ON;
+GO
+-- Create logins
+CREATE LOGIN {{ x3d_passport_user_login }} WITH PASSWORD = '{{ x3d_passport_user_password }}';
+GO
+CREATE LOGIN {{ x3d_passport_admin_login }} WITH PASSWORD = '{{ x3d_passport_admin_password }}';
+GO
+USE {{ x3d_passport_db }};
+GO
+-- Create users on correct DATABASE (after use) and with correct schema
+CREATE USER {{ x3d_passport_user }} FOR LOGIN {{ x3d_passport_user_login }} WITH DEFAULT_SCHEMA = {{ x3d_passport_schema }};
+GO
+CREATE USER {{ x3d_passport_admin }} FOR LOGIN {{ x3d_passport_admin_login }} WITH DEFAULT_SCHEMA = {{ x3d_passport_schema }};
+GO
+-- Create schema
+CREATE SCHEMA {{ x3d_passport_schema }} AUTHORIZATION {{ x3d_passport_admin }};
+GO
+-- Grant access
+GRANT CREATE TABLE, ALTER, SELECT, INSERT, UPDATE, DELETE ON DATABASE::{{ x3d_passport_db }} TO  {{ x3d_passport_admin }};
+GO
+GRANT SELECT, INSERT, UPDATE, DELETE, ALTER ON SCHEMA::{{ x3d_passport_schema }} TO {{ x3d_passport_user }};
+GO

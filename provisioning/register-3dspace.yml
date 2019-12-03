@@ -1,0 +1,21 @@
+---
+  - hosts: x3dspace
+    gather_facts: false
+    tasks:
+    - name: Register 3DSpace in 3DPassport
+      win_command: '{{ target_path }}\3DSpace\win_b64\code\command\3DSpaceRegistrationIn3DPassport.bat'
+      become: yes
+      become_method: runas
+      vars:
+        ansible_become_user: vagrant
+        ansible_become_pass: vagrant
+      tags: register_3dspace
+
+  - hosts: windows
+    gather_facts: False
+    tasks:
+    - name: Place DSLicSrv.txt
+      win_template:
+        src: DSLicSrv.txt.j2
+        dest: C:\ProgramData\DassaultSystemes\Licenses\DSLicSrv.txt
+      tags: place_dsls

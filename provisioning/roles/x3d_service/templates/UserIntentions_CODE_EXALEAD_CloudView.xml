@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserIntentions mediaName="CODE\win_b64\EXALEAD_CV.media" mediaVersion="421">
+  <SetVariable name="DSYWelcomePanel"/>
+  <SetVariable name="TARGET_PATH" value="{{ x3d_exaled_cloudview_target_path }}"/>
+</UserIntentions>

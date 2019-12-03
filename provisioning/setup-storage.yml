@@ -1,0 +1,23 @@
+---
+  - hosts: windows
+    gather_facts: no
+    tasks:
+    # - name: retrieve disc information
+    #   win_disk_facts:
+    # - name: abort when the disk number does not exist
+    #   fail:
+    #     msg: "Disk does not exist. ( disk_number = 1 ) "
+    #   when: ansible_disks[1] is undefined
+    - name: initialize disk
+      win_shell: "Initialize-Disk -Number 1"
+      # when: ansible_disks[1].guid is none
+
+    - name: Create a partition with drive letter D and max size
+      win_partition:
+        drive_letter: D
+        partition_size: -1
+        disk_number: 1
+
+    - name: format disk
+      win_shell: "Format-Volume -DriveLetter D "
+      # when: ansible_disks[1].guid is none

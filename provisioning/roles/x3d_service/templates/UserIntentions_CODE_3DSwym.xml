@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserIntentions mediaName="CODE\win_b64\X3D_SWYM.media" mediaVersion="421">
+  <SetVariable name="installEmbeddedServerJRE" value="true"/>
+  <SetVariable name="X3DCSMA_3DPassportURL" value="{{ x3d_csma_passport_url }}"/>
+  <SetVariable name="X3DCSMA_3DSWYM_FULL_TEXT_SEARCH" value="{{ x3d_swym_full_text_search_url }}"/>
+  <SetVariable name="X3DCSMA_3DDashboardURL" value="{{ x3d_csma_dashboard_url }}"/>
+  <SetVariable name="X3DCSMA_3DCompassURL" value="{{ x3d_csma_3dcompass_url }}"/>
+  <SetVariable name="X3DCSMA_6WTAGURL" value="{{ x3d_csma_6wtag_url }}"/>
+  <SetVariable name="X3DCSMA_3DSWYMURL" value="{{ x3d_csma_swym_url }}"/>
+  <SetVariable name="X3DCSMA_3DCommentURL" value="{{ x3d_csma_comment_url }}"/>
+  <SetVariable name="X3DCSMA_3DNotificationURL" value="{{ x3d_csma_notification_url }}"/>
+  <SetVariable name="SHARED_DIR" value="{{ x3d_swym_shared_dir }}"/>
+  <SetVariable name="LOG_DIR" value="{{ x3d_swym_log_dir }}"/>
+  <SetVariable name="TMP_DIR" value="{{ x3d_swym_tmp_dir }}"/>
+  <SetVariable name="DB_MSSQL_SERVER" value="{{ x3d_swym_db_url }}"/>
+  <SetVariable name="DB_MSSQL_DBNAME" value="{{ x3d_swym_social_db }}"/>
+  <SetVariable name="DB_MSSQL_DBNAME_MEDIA" value="{{ x3d_swym_media_db }}"/>
+  <SetVariable name="DB_MSSQL_DBNAME_WP" value="{{ x3d_swym_widget_db }}"/>
+  <SetVariable name="DB_MSSQL_ADMIN_USER" value="{{ x3d_swym_admin_login }}"/>
+  <SetVariable name="DB_MSSQL_ADMIN_PASSWORD" value="{{ x3d_swym_admin_password }}"/>
+  <SetVariable name="DB_MSSQL_USER" value="{{ x3d_swym_user_login }}"/>
+  <SetVariable name="DB_MSSQL_PASSWORD" value="{{ x3d_swym_user_password }}"/>
+  <SetVariable item="sqlserver" name="DB_TYPE" value="true"/>
+  <SetVariable name="IS_BATCH_SERVER" value="true"/>
+  <SetVariable name="ENOVIA_USER" value="{{ x3d_swym_admin_6wtag_user }}"/>
+  <SetVariable name="ENOVIA_PASSWORD" value="{{ x3d_swym_admin_6wtag_password }}"/>
+  <SetVariable name="X3DCSMA_SMTP_HOST" value="{{ x3d_csma_smtp_host }}"/>
+  <SetVariable name="X3DCSMA_SMTP_MAIL_SENDER" value="{{ x3d_csma_smtp_mail_sender }}"/>
+  <SetVariable name="TomEEConnectionPort" value="{{ x3d_swym_tomee_connection_port }}"/>
+  <SetVariable name="certificates_repository" value="{{ certificates_repository }}"/>
+  <SetVariable item="AdminToolsShortcut" name="CustomShortcuts" value="true"/>
+  <SetVariable name="CV_ADMIN_PASSWORD" value="{{ x3d_swym_cloudview_admin_password }}"/>
+  <SetVariable name="DATADIR" value="C:\DassaultSystemes\R2019x\3DSwym\win_b64\datadir"/>
+  <SetVariable name="DSYWelcomePanel"/>
+  <SetVariable name="TARGET_PATH" value="{{ x3d_swym_target_path }}"/>
+  <!--3DSwym Foundation-->
+  <SetVariable item="CODE\win_b64\X3DSWYM_TP.prd" name="SelectProduct" value="{{ x3d_swym_foundation_install }}"/>
+  <!--3DSwym Video Converter-->
+  <SetVariable item="CODE\win_b64\X3DVICO_TP.prd" name="SelectProduct" value="{{ x3d_swym_video_converter_install }}"/>
+  <!--3DSwym Index-->
+  <SetVariable item="CODE\win_b64\X3DSWCV_TP.prd" name="SelectProduct" value="{{ x3d_swym_index_install }}"/>
+</UserIntentions>

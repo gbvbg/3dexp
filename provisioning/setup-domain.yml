@@ -1,0 +1,123 @@
+---
+- hosts: windows
+  gather_facts: False
+  tasks:
+  - name: Add 127.0.0.1 as an A record for localhost
+    win_hosts:
+      state: present
+      canonical_name: localhost
+      ip_address: 127.0.0.1
+
+  - name: Add ::1 as an AAAA record for localhost
+    win_hosts:
+      state: present
+      canonical_name: localhost
+      ip_address: '::1'
+
+  # - name: Add names aliases for hosts and endpoints
+  #   win_hosts:
+  #     state: present
+  #     canonical_name: "{{ item.server }}.{{ domain }}"
+  #     ip_address: "{{ hostvars[item.server]['ansible_host'] }}"
+  #     action: add
+  #     aliases: "{{ endpoints_def | json_query(s_query) | product([domain]) | map('join', '.') | join('')  }}"
+  #   vars:
+  #     s_query: "endpoints[?name==`{{ item.name }}`].name"
+  #   with_items:
+  #     - "{{ endpoints_def.endpoints }}"
+
+  - name: Set timezone to 'Russian Standard Time' (GMT+03:00)
+    win_timezone:
+      timezone: Russian Standard Time
+
+- hosts: windows_domain_controllers
+  serial: 1
+  tasks:
+  - name: Set up domain controller
+    block:
+    - name: Ensure a domain exists
+      win_domain:
+        dns_domain_name: "{{ domain }}"
+        safe_mode_password: "{{ safe_mode_password }}"
+      register: result
+    - name: Reboot after Domain Creation
+      win_reboot:
+        msg: "Server config in progress; rebooting..."
+      when: result.reboot_required
+    - name: Ensure a server is a domain controller
+      win_domain_controller:
+        dns_domain_name: "{{ domain }}"
+        domain_admin_user: "{{ domain_admin_user }}"
+        domain_admin_password: "{{ domain_admin_password }}"
+        safe_mode_password: "{{ safe_mode_password }}"
+        state: domain_controller
+        log_path: C:\ansible_win_domain_controller.txt
+      register: dc_result
+    - name: Reboot after Domain Controller
+      win_reboot:
+        msg: "Server config in progress; rebooting..."
+        shutdown_timeout: 3600
+        reboot_timeout: 3600
+      when: dc_result.reboot_required
+    tags: setup_domain_controller
+
+- hosts: windows
+  gather_facts: no
+  tasks:
+  - name: get adapter name
+    vars:
+      addr: "{{ hostvars[inventory_hostname].ansible_host }}"
+    win_shell: |
+      $addr='{{ addr }}'
+      $desc=get-wmiobject Win32_NetworkAdapterConfiguration |? {$_.ipaddress -contains $addr} |select Description |% {$_.Description}
+      Get-NetAdapter |? {$_.InterfaceDescription -contains $desc} | select Name |% {$_.Name}
+    register: adapter_name
+  - name: Set a single address on the adapter named Ethernet
+    win_dns_client:
+      # todo: adapter_names can be different on diff machines?
+      adapter_names: "{{ adapter_name.stdout_lines[0] }}"
+      ipv4_addresses: "{{ hostvars[groups['windows_domain_controllers'][0]]['ansible_host'] }}"
+    tags: set_dns_client
+  - win_domain_membership:
+      dns_domain_name: '{{ domain }}'
+      domain_admin_user: '{{ user }}'
+      domain_admin_password: '{{ user_password }}'
+      state: domain
+    register: domain_state
+  - name: Reboot after domain joining
+    win_reboot:
+      msg: "Server config in progress; rebooting..."
+      shutdown_timeout: 3600
+      reboot_timeout: 3600
+    when: domain_state.reboot_required
+- hosts: windows_domain_controllers
+  gather_facts: no
+  tasks:
+  - name: Add names for hosts
+    win_dns_record:
+      state: present
+      type: "A"
+      zone: "{{ domain }}"
+      name: "{{ item }}"
+      value: "{{ hostvars[item]['ansible_host'] }}"
+    with_items:
+      - "{{ groups['windows'] }}"
+    tags: add_names_for_hosts
+  - name: Add aliases for endpoints
+    win_dns_record:
+      state: present
+      type: "CNAME"
+      zone: "{{ domain }}"
+      name: "{{ item.key }}"
+      value: "{{ hostvars[groups['httpd'][0]]['inventory_hostname'] }}.{{ domain }}"
+    with_items:
+      - "{{ endpoints | dict2items }}"
+- hosts: windows
+  gather_facts: no
+  tasks:
+  - name: Disable Domain firewall
+    win_firewall:
+      state: disabled
+      profiles:
+      - Domain
+    tags: disable_firewall

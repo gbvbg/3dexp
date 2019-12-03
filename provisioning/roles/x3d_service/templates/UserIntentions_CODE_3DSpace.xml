@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserIntentions mediaName="CODE\win_b64\X3D_CSMA.media" mediaVersion="421">
+  <SetVariable name="installEmbeddedServerJRE" value="true"/>
+  <SetVariable name="MSSQL_ConnectUser" value="{{ x3d_space_db_login }}"/>
+  <SetVariable name="MSSQL_ConnectPwd" value="{{ x3d_space_db_user_password }}"/>
+  <SetVariable name="MSSQL_Instance" value="{{ x3d_space_db }}"/>
+  <SetVariable name="MSSQL_Server" value="{{ x3d_space_db_url }}"/>
+  <SetVariable name="CreateNewMSSQL_DB" value="false"/>
+  <SetVariable name="PathMSSQLFiles" value="{{ x3d_space_db_file_path }}"/>
+  <SetVariable name="MSSQL_Default_Data_FG" value=""/>
+  <SetVariable name="MSSQL_Default_Index_FG" value=""/>
+  <SetVariable item="SQL2008" name="Radio_DBChoice" value="true"/>
+  <SetVariable name="X3DCSMA_creator_password" value="{{ X3DCSMA_creator_password }}"/>
+  <SetVariable name="X3DCSMA_administor_password" value="{{ X3DCSMA_administor_password }}"/>
+  <SetVariable name="DATA_TARGET_PATH" value="{{ x3d_space_data_path }}"/>
+  <SetVariable name="BOOL_UpdateDB" value="true"/>
+  <SetVariable name="Text_DataTBS_wrap" value="I1_DATA"/>
+  <SetVariable name="Text_IndexTBS_wrap" value="I1_INDEX"/>
+  <SetVariable name="VplmDataTBS" value="M1_DATA"/>
+  <SetVariable name="VplmIndexTBS" value="M1_INDEX"/>
+  <SetVariable name="X3DCSMA_3DPassportURL" value="{{ x3d_csma_passport_url }}"/>
+  <SetVariable name="X3DCSMA_FULL_TEXT_SEARCH" value="{{ x3d_csma_full_text_search_url }}"/>
+  <SetVariable name="X3DCSMA_FEDERATED_SEARCH" value="{{ x3d_csma_federated_search_url }}"/>
+  <SetVariable name="X3DCSMA_3DDashboardURL" value="{{ x3d_csma_dashboard_url }}"/>
+  <SetVariable name="X3DCSMA_3DSpaceURL" value="{{ x3d_csma_space_url }}"/>
+  <SetVariable name="X3DCSMA_3DSWYMURL" value="{{ x3d_csma_swym_url }}"/>
+  <SetVariable name="X3DCSMA_ENOVIAV5" value="{{ X3DCSMA_ENOVIAV5 }}"/>
+  <SetVariable name="X3DCSMA_3DCommentURL" value="{{ x3d_csma_comment_url }}"/>
+  <SetVariable name="X3DCSMA_3DNotificationURL" value="{{ x3d_csma_notification_url }}"/>
+  <SetVariable name="X3DCSMA_SMTP_HOST" value="{{ x3d_csma_smtp_host }}"/>
+  <SetVariable name="X3DCSMA_SMTP_MAIL_SENDER" value="{{ x3d_csma_smtp_mail_sender }}"/>
+  <SetVariable name="X3DCSMA_build_archives" value="true"/>
+  <SetVariable name="X3DCSMA_deploy_archives" value="true"/>
+  <SetVariable item="BOOL_MediumJavaHeapSize" name="X3DCSMA_JavaHeapSize" value="true"/>
+  <SetVariable name="X3DCSMA_portCAS" value="{{ x3d_space_tomee_connection_port }}"/>
+  <SetVariable name="certificates_repository" value="{{ certificates_repository }}"/>
+  <SetVariable name="X3DCSMA_SXI_postinstall" value="true"/>
+  <SetVariable name="X3DCSMA_BOOL_ToolsinStartMenu" value="true"/>
+  <SetVariable name="X3DCSMA_BOOL_ShortcutsOnDesktop" value="true"/>
+  <SetVariable name="DSYWelcomePanel"/>
+  <SetVariable name="TARGET_PATH" value="{{ x3d_space_target_path }}"/>
+</UserIntentions>

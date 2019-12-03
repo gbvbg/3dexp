@@ -1,0 +1,16 @@
+
+{% for ep in  endpoints|dict2items  %}
+
+
+<a h="https://{{ ep.key }}.{{ domain }}:{{ ep.value }}/{{ ep.key }}/healthcheck">3DPassport</a> <p/>
+3DDashboard: https://3ddashboard.domain.local:545/3ddashboard/test-alive
+3DSearch: https://3dsearch.local:546/federated/manager?query=monitoring
+3DSpace: https://3dspace.domain.local:544/3dspace/servlet/fcs/ping
+3DCompass: https://<hostnamedomain.local:<port>/<URI>/servlet/fcs/ping
+6WTags: https://<hostnamedomain.local:<port>/<URI>/servlet/fcs/ping
+3DComment: https://<hostnamedomain.local:<port>/<URI>/monitoring/healthcheck
+3DNotification:	https://<hostnamedomain.local:<port>/<URI>
+3DSwym: https://<hostnamedomain.local:<port>/<URI>/monitoring/healthcheck
+FileCollaboration: https://<hostnamedomain.local:<port>/<URI>/servlet/fcs/about
+
+{% endfor %}

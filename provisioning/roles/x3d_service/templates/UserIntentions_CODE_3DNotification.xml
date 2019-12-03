@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserIntentions mediaName="CODE\win_b64\X3D_INTF_SC.media" mediaVersion="421">
+  <SetVariable name="installEmbeddedServerJRE" value="true"/>
+  <SetVariable name="certificates_repository" value="{{ certificates_repository }}"/>
+  <SetVariable name="X3DCSMA_3DPassportURL" value="{{ x3d_csma_passport_url }}"/>
+  <SetVariable name="X3DCSMA_3DDashboardURL" value="{{ x3d_csma_dashboard_url }}"/>
+  <SetVariable name="X3DCSMA_3DCompassURL" value="{{ x3d_csma_3dcompass_url }}"/>
+  <SetVariable name="X3DCSMA_3DSWYMURL" value="{{ x3d_csma_swym_url }}"/>
+  <SetVariable name="X3DCSMA_3DNotificationURL" value="{{ x3d_csma_notification_url }}"/>
+  <SetVariable name="NODEINFRACONF_DIR" value="{{ NODEINFRACONF_DIR }}"/>
+  <SetVariable name="NODEINFRALOG_DIR" value="{{ NODEINFRALOG_DIR }}"/>
+  <SetVariable name="NODEINFRATMP_DIR" value="{{ NODEINFRATMP_DIR }}"/>
+  <SetVariable name="X3DCSMA_SMTP_HOST" value="{{ x3d_csma_smtp_host }}"/>
+  <SetVariable name="X3DCSMA_SMTP_MAIL_SENDER" value="{{ x3d_csma_smtp_mail_sender }}"/>
+  <SetVariable name="DB_MSSQL_SERVER" value="{{ x3d_notification_db_url }}"/>
+  <SetVariable name="DB_MSSQL_DBNAME" value="{{ x3d_notification_db }}"/>
+  <SetVariable name="DB_MSSQL_ADMIN_USER" value="{{ x3d_notification_admin_login }}"/>
+  <SetVariable name="DB_MSSQL_ADMIN_PASSWORD" value="{{ x3d_notification_admin_password }}"/>
+  <SetVariable name="DB_MSSQL_USER" value="{{ x3d_notification_user_login }}"/>
+  <SetVariable name="DB_MSSQL_PASSWORD" value="{{ x3d_notification_user_password }}"/>
+  <SetVariable name="NODEBACKEND_URL_PORT" value="{{ x3d_notification_nodebackend_port }}"/>
+  <SetVariable item="sqlserver" name="DB_TYPE" value="true"/>
+  <SetVariable name="DSYWelcomePanel"/>
+  <SetVariable name="TARGET_PATH" value="{{ x3d_notification_target_path }}"/>
+</UserIntentions>

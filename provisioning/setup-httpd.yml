@@ -1,0 +1,66 @@
+---
+- hosts: httpd
+  gather_facts: false
+  tasks:
+  - name: download Apache Hause
+    win_get_url:
+      url: https://de.apachehaus.com/downloads/httpd-2.4.39-o102s-x64-vc14.zip
+      dest: "C:\\Users\\{{ user }}\\Downloads"
+      force: no
+      timeout: 60
+    tags: download_httpd
+  - name: unzip Apache Haus
+    win_unzip:
+      src: "C:\\Users\\{{ user }}\\Downloads\\httpd-2.4.39-o102s-x64-vc14.zip"
+      dest: C:\
+    tags: unzip_httpd
+  - name: stop IIS services
+    win_service:
+      name: w3svc
+      state: stopped
+    ignore_errors: yes
+    tags: configure_httpd
+  - name: Install vcredist2015 (VC14)
+    win_chocolatey:
+      name: vcredist2015
+      state: present
+  - name: Create a Apache24 service
+    win_service:
+      name: Apache24
+      path: C:\Apache24\bin\httpd.exe -k runservice
+      display_name: Apache24
+      description: A test service description
+      state: started
+    tags: configure_httpd
+  - name: Configure vhosts
+    win_template:
+      src: vhosts.conf.j2
+      dest: C:\Apache24\conf\vhosts.conf
+    tags: configure_vhosts_template
+  - name: Configure Apache settings
+    win_lineinfile:
+      path: C:\Apache24\conf\httpd.conf
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    with_items:
+      - { regexp: '^Define SRVROOT', line: 'Define SRVROOT "C:\Apache24"' }
+    tags: configure_settings
+  - name: Configure Apache settings
+    win_lineinfile:
+      path: C:\Apache24\conf\httpd.conf
+      state: present
+      line: "{{ item }}"
+      insertafter: EOF
+    with_items:
+      - "KeepAlive On"
+      - "KeepAliveTimeout 600"
+      - "MaxKeepAliveRequests 400"
+      - "LoadModule headers_module modules/mod_headers.so"
+      - "LoadModule proxy_module modules/mod_proxy.so"
+      - "LoadModule proxy_http_module modules/mod_proxy_http.so"
+      - "LoadModule ssl_module modules/mod_ssl.so"
+      - "LoadModule rewrite_module modules/mod_rewrite.so"
+      - "LoadModule deflate_module modules/mod_deflate.so"
+      - "LoadModule filter_module modules/mod_filter.so"
+      - "Include conf/vhosts.conf"
+    tags: configure_settings

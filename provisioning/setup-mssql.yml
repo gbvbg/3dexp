@@ -1,0 +1,35 @@
+- hosts: database
+  roles:
+  - role: kkolk.mssql
+    mssql_sqlsvc_account: "{{ domain }}\\sql_svc"
+    mssql_sqlsvc_account_pass: MyPlainTextPassWord01
+    mssql_agentsvc_account: "{{ domain }}\\sql_agt"
+    mssql_agentsvc_account_pass: MyPlainTextPassWord01
+    mssql_base_ldap_path: "cn=Users,dc=domain,dc=local"
+    domain_controller: "{{ groups['windows_domain_controllers'][0] }}"
+    mssql_temp_download_path: "c:\\Users\\{{ user }}\\Downloads"
+    mssql_instance_name: "{{ x3d_mssql_instance_name }}"
+    mssql_port: "{{ x3d_mssql_port }}"
+    mssql_sysadmin_accounts:
+    - '{{ domain }}\Domain Admins'
+    - '{{ domain }}\Administrator'
+    - '{{ user }}'
+    mssql_features: SQLENGINE,FULLTEXT,CONN
+    mssql_collation: SQL_Latin1_General_CP1_CI_AS
+    tags: install_mssql
+  tasks:
+  - name: Enable MSSQL mixed LoginMode
+    win_regedit:
+      state: present
+      path: "HKLM:\\SOFTWARE\\Microsoft\\Microsoft SQL Server\\MSSQL14.{{ x3d_mssql_instance_name }}\\MSSQLServer\\"
+      name: LoginMode
+      data: 2
+      type: dword
+    register: loginMode
+    tags: enable_loginmode
+  - name: Reboot after enable of mixed login mode
+    win_reboot:
+      msg: "Server config in progress; rebooting..."
+      shutdown_timeout: 3600
+      reboot_timeout: 3600
+    when: loginMode.data_changed

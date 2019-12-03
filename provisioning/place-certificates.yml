@@ -1,0 +1,22 @@
+---
+- hosts: windows
+  tasks:
+  - name: Place keys
+    block:
+    - win_file:
+        path: "{{ certificates_repository }}"
+        state: directory
+    - win_copy:
+        src: "{{ item }}"
+        dest: "{{ certificates_repository }}"
+      loop:
+        - ~/etc/ssl/crt/
+        - ~/etc/ssl/private/
+    tags: place_keys
+  - name: Import CA certificate
+    win_certificate_store:
+      path: "{{ certificates_repository }}\\{{ domain }}_CA.crt"
+      state: present
+      store_location: LocalMachine
+      store_name: AuthRoot
+    tags: import_ca_crt

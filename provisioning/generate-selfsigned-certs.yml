@@ -1,0 +1,46 @@
+---
+# to be parametrised
+- hosts: localhost
+  tasks:
+  - name: Generate keys
+    block:
+    - file:
+        path: '~/etc/ssl/{{ item }}'
+        state: directory
+      with_items:
+        - crt
+        - csr
+        - private
+    #- name: Generate a CA private key.
+    - openssl_privatekey:
+        path: ~/etc/ssl/private/{{ domain }}_CA.pem
+    #- name: Generate a CA CSR.
+    - openssl_csr:
+        path: ~/etc/ssl/csr/{{ domain }}_CA.csr
+        privatekey_path: ~/etc/ssl/private/{{ domain }}_CA.pem
+        common_name: "{{ domain }}"
+    #- name: Generate a Self Signed OpenSSL certificate
+    - openssl_certificate:
+        path: ~/etc/ssl/crt/{{ domain }}_CA.crt
+        privatekey_path: ~/etc/ssl/private/{{ domain }}_CA.pem
+        csr_path: ~/etc/ssl/csr/{{ domain }}_CA.csr
+        provider: selfsigned
+    #- name: Generate a server private key.
+    - openssl_privatekey:
+        path: '~/etc/ssl/private/{{ item.key }}.{{ domain }}.pem'
+      loop: "{{ endpoints | dict2items }}"
+    #- name: Generate a server CSR
+    - openssl_csr:
+        path: '~/etc/ssl/csr/{{ item.key }}.{{ domain }}.csr'
+        privatekey_path: '~/etc/ssl/private/{{ item.key }}.{{ domain }}.pem'
+        common_name: '{{ item.key }}.{{ domain }}'
+      loop: "{{ endpoints | dict2items }}"
+    #- name: Generate a server certificate signed with your own CA certificate
+    - openssl_certificate:
+        path: '~/etc/ssl/crt/{{ item.key }}.{{ domain }}.crt'
+        csr_path: '~/etc/ssl/csr/{{ item.key }}.{{ domain }}.csr'
+        ownca_path: ~/etc/ssl/crt/{{ domain }}_CA.crt
+        ownca_privatekey_path: ~/etc/ssl/private/{{ domain }}_CA.pem
+        provider: ownca
+      loop: "{{ endpoints | dict2items }}"
+    tags: generate_keys

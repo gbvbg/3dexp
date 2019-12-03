@@ -1,0 +1,38 @@
+USE master;
+GO
+-- Create database and associated file groups
+CREATE DATABASE [{{ x3d_space_db }}] ON PRIMARY (NAME=[{{ x3d_space_db }}],
+FILENAME='{{ x3d_space_db_file_path }}\{{ x3d_space_db }}.mdf',SIZE={{ x3d_space_db_file_size }}, FILEGROWTH={{ x3d_space_db_file_growth }}) ,
+FILEGROUP [I1_DATA] (NAME=[I1_DATA] , FILENAME='{{ x3d_space_db_file_path }}\I1_DATA.mdf',SIZE={{ x3d_space_db_file_size }},FILEGROWTH={{ x3d_space_db_file_growth }}) ,
+FILEGROUP [I1_INDEX] (NAME=[I1_INDEX] , FILENAME='{{ x3d_space_db_file_path }}\I1_INDEX.mdf',SIZE={{ x3d_space_db_file_size }},FILEGROWTH={{ x3d_space_db_file_growth }}),
+FILEGROUP [M1_DATA] (NAME=[M1_DATA] , FILENAME='{{ x3d_space_db_file_path }}\M1_DATA.mdf',SIZE={{ x3d_space_db_file_size }},FILEGROWTH={{ x3d_space_db_file_growth }}),
+FILEGROUP [M1_INDEX] (NAME=[M1_INDEX] , FILENAME='{{ x3d_space_db_file_path }}\M1_INDEX.mdf',SIZE={{ x3d_space_db_file_size }},FILEGROWTH={{ x3d_space_db_file_growth }}),
+FILEGROUP [V1_DATA] (NAME=[V1_DATA] , FILENAME='{{ x3d_space_db_file_path }}\V1_DATA.mdf',SIZE={{ x3d_space_db_file_size }},FILEGROWTH={{ x3d_space_db_file_growth }}),
+FILEGROUP [V1_INDEX] (NAME=[V1_INDEX] , FILENAME='{{ x3d_space_db_file_path }}\V1_INDEX.mdf',SIZE={{ x3d_space_db_file_size }},FILEGROWTH={{ x3d_space_db_file_growth }})
+LOG ON (NAME=[{{ x3d_space_db }}_log] ,FILENAME='{{ x3d_space_db_file_path }}\{{ x3d_space_db }}.ldf',SIZE={{ x3d_space_db_log_size }})
+COLLATE SQL_Latin1_General_CP1_CS_AS;
+GO
+ALTER DATABASE [{{ x3d_space_db }}] SET AUTO_CLOSE OFF ;
+GO
+ALTER DATABASE [{{ x3d_space_db }}] SET READ_COMMITTED_SNAPSHOT ON;
+GO
+ALTER DATABASE [{{ x3d_space_db }}] SET AUTO_CREATE_STATISTICS ON;
+GO
+ALTER DATABASE [{{ x3d_space_db }}] SET AUTO_UPDATE_STATISTICS ON;
+GO
+ALTER DATABASE [{{ x3d_space_db }}] SET AUTO_UPDATE_STATISTICS_ASYNC ON;
+GO
+-- Create logins
+CREATE LOGIN {{ x3d_space_db_login }} WITH PASSWORD = 'Passport#1';
+GO
+USE {{ x3d_space_db }};
+GO
+-- Create user on correct DATABASE (after use) and with correct schema
+CREATE USER {{ x3d_space_db_user }} FOR LOGIN {{ x3d_space_db_login }} WITH DEFAULT_SCHEMA = {{ x3d_space_db_schema }};
+GO
+-- Create schema
+CREATE SCHEMA {{ x3d_space_db_schema }} AUTHORIZATION {{ x3d_space_db_user }};
+GO
+-- Grant access
+GRANT CREATE TABLE, ALTER, SELECT, INSERT, UPDATE, DELETE ON DATABASE::{{ x3d_space_db }} TO {{ x3d_space_db_login }};
+GO

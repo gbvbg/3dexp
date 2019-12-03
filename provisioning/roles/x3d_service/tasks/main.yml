@@ -1,0 +1,29 @@
+---
+  - name: Place response file for {{ service }}
+    win_template:
+      src: UserIntentions_CODE_{{ service }}.xml
+      dest: "c:/users/{{ user }}/downloads/"
+  - name: Install {{ service }}
+    win_command: StartTUI.exe --silent c:\users\{{ user }}\downloads\UserIntentions_CODE_{{ service }}.xml --xmlreport c:\users\{{ user }}\downloads\report_{{ service }}.xml
+    args:
+      chdir: C:\distros\AM_3DEXP_Platform.AllOS\{{ media_volume }}\{{ service }}\Windows64\1\
+    vars:
+      ansible_become: yes
+      ansible_become_method: runas
+      ansible_become_user: '{{ ansible_user }}'
+      ansible_become_password: '{{ ansible_password  }}'
+  # - name: Copy fragment {{ service }}
+  #   win_copy:
+  #     src: "{{ target_path }}\\{{ service }}\\win_b64\\templates\\{{ service }}_httpd_fragment.conf"
+  #     dest: "\\{{ hostvars[ groups['httpd'][0] ]['ansible_host'] }}\\C$\\Apache24\\conf\\"
+  #     remote_src: yes
+  #   when: is_copy_fragment
+  #   become: yes
+  #   become_method: runas
+  #   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+  #   vars:
+  #     ansible_become: yes
+  #     ansible_become_method: runas
+  #     ansible_become_user: '{{ ansible_user }}'
+  #     ansible_become_password: '{{ ansible_password  }}'
+  #   tags: copy_fragment

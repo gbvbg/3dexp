@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserIntentions mediaName="CODE\win_b64\X3D_CMNT.media" mediaVersion="421">
+  <SetVariable name="installEmbeddedServerJRE" value="true"/>
+  <SetVariable name="X3DCSMA_3DPassportURL" value="{{ x3d_csma_passport_url }}"/>
+  <SetVariable name="X3DCSMA_3DDashboardURL" value="{{ x3d_csma_dashboard_url }}"/>
+  <SetVariable name="X3DCSMA_3DCompassURL" value="{{ x3d_csma_3dcompass_url }}"/>
+  <SetVariable name="X3DCSMA_3DCommentURL" value="{{ x3d_csma_comment_url }}"/>
+  <SetVariable name="X3DCSMA_3DNotificationURL" value="{{ x3d_csma_notification_url }}"/>
+  <SetVariable name="SOCIAL_SHARED_DIR" value="{{ SOCIAL_SHARED_DIR }}"/>
+  <SetVariable name="SOCIAL_LOG_DIR" value="{{ SOCIAL_LOG_DIR }}"/>
+  <SetVariable name="SOCIAL_TMP_DIR" value="{{ SOCIAL_TMP_DIR }}"/>
+  <SetVariable name="TomEEConnectionPort" value="{{ x3d_comment_tomee_connection_port }}"/>
+  <SetVariable name="certificates_repository" value="{{ certificates_repository }}"/>
+  <SetVariable name="SOCIAL_DB_MSSQL_SERVER" value="{{ x3d_comment_db_url }}"/>
+  <SetVariable name="SOCIAL_DB_MSSQL_DBNAME" value="{{ x3d_comment_db }}"/>
+  <SetVariable name="SOCIAL_DB_MSSQL_ADMIN_USER" value="{{ x3d_comment_admin_login }}"/>
+  <SetVariable name="SOCIAL_DB_MSSQL_ADMIN_PASSWORD" value="{{ x3d_comment_admin_password }}"/>
+  <SetVariable name="SOCIAL_DB_MSSQL_USER" value="{{ x3d_comment_user_login }}"/>
+  <SetVariable name="SOCIAL_DB_MSSQL_PASSWORD" value="{{ x3d_comment_user_password }}"/>
+  <SetVariable item="sqlserver" name="SOCIAL_DB_TYPE" value="true"/>
+  <SetVariable name="IS_BATCH_SERVER" value="true"/>
+  <SetVariable name="DSYWelcomePanel"/>
+  <SetVariable name="TARGET_PATH" value="{{ x3d_comment_target_path }}"/>
+</UserIntentions>

@@ -1,0 +1,35 @@
+---
+  - hosts: windows
+    gather_facts: yes
+    vars:
+      ep:
+        pass: 2
+        dash: 3
+    tasks:
+      #- name: loop
+      #   debug:
+      #     msg: "Key={{ item.key }} value={{ item.value }}"
+      #   loop: "{{ ep | dict2items }}"
+      # - debug:
+      #     msg: "{{ep.pass}}"
+      - debug:
+          msg: "{{ item }} address={{ hostvars[item]['ansible_host'] }}"
+        with_items: "{{ groups['windows'] }}"
+      - debug:
+          msg: "alias {{ item.key }} for {{ hostvars[groups['httpd'][0]]['inventory_hostname'] }}"
+        with_items: "{{ endpoints | dict2items }}"
+      - debug:
+          var: distro_secret
+      - debug:
+          var: vault_distro_secret
+      - name: get adapter name
+        vars:
+          addr: "{{ hostvars[inventory_hostname].ansible_host }}"
+        win_shell: |
+          $addr='{{ addr }}'
+          $desc=get-wmiobject Win32_NetworkAdapterConfiguration |? {$_.ipaddress -contains $addr} |select Description |% {$_.Description}
+          Get-NetAdapter |? {$_.InterfaceDescription -contains $desc} | select Name |% {$_.Name}
+        register: adapter_name
+      - debug:
+          var: adapter_name.stdout_lines[0]
+      # loop: "{{ war_files | dict2items | subelements('value') }}"

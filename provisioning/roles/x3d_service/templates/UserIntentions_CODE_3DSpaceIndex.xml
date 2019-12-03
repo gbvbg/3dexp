@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserIntentions mediaName="CODE\win_b64\ENOVIA_SXI.media" mediaVersion="421">
+  <SetVariable name="FullCloud_URL" value="{{ x3d_csma_full_text_search_url }}"/>
+  <SetVariable name="FullCloud_AdminPassword" value="{{ FullCloud_AdminPassword }}"/>
+  <SetVariable item="Simple" name="Radio_mode" value="true"/>
+  <SetVariable name="DSYWelcomePanel"/>
+  <SetVariable name="TARGET_PATH" value="{{ x3d_csma_full_text_search_target_path }}"/>
+</UserIntentions>

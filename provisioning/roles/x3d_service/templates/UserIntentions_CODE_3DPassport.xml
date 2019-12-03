@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserIntentions mediaName="CODE\win_b64\X3D_PASS.media" mediaVersion="421">
+  <SetVariable name="installEmbeddedServerJRE" value="true"/>
+  <SetVariable name="TomEEConnectionPort" value="{{ x3d_passport_tomee_connection_port }}"/>
+  <SetVariable name="certificates_repository" value="{{ certificates_repository }}"/>
+  <SetVariable name="PASS_MSSQL_SQLURL_HOST_AND_PORT" value="{{ x3d_passport_db_url }}"/>
+  <SetVariable name="PASS_MSSQL_SQLURL_SCHEMA" value="{{ x3d_passport_schema }}"/>
+  <SetVariable name="PASS_MSSQL_SQLUserAdmin" value="{{ x3d_passport_admin_login }}"/>
+  <SetVariable name="PASS_MSSQL_SQLPasswordAdmin" value="{{ x3d_passport_admin_password }}"/>
+  <SetVariable name="PASS_MSSQL_SQLUser" value="{{ x3d_passport_user }}"/>
+  <SetVariable name="PASS_MSSQL_SQLPassword" value="{{ x3d_passport_user_password }}"/>
+  <SetVariable name="PASS_MSSQL_SQLURLCas_HOST_AND_PORT" value="{{ x3d_passport_tokens_db_url }}"/>
+  <SetVariable name="PASS_MSSQL_SQLURLCas_SCHEMA" value="{{ x3d_passport_tokens_schema }}"/>
+  <SetVariable name="PASS_MSSQL_SQLUserCas" value="{{ x3d_passport_tokens_user }}"/>
+  <SetVariable name="PASS_MSSQL_SQLPasswordCas" value="{{ x3d_passport_tokens_user_password }}"/>
+  <SetVariable name="PASS_MSSQL_DatabaseConnectionCheck" value="{{ x3dpassport_PASS_MSSQL_DatabaseConnectionCheck }}"/>
+  <SetVariable name="X3DCSMA_3DPassportURL" value="{{ x3d_csma_passport_url }}"/>
+  <SetVariable name="X3DCSMA_3DCompassURL" value="{{ x3d_csma_3dcompass_url }}"/>
+  <SetVariable name="X3DCSMA_SMTP_HOST" value="{{ x3d_csma_smtp_host }}"/>
+  <SetVariable name="X3DCSMA_SMTP_MAIL_SENDER" value="{{ x3d_csma_smtp_mail_sender }}"/>
+  <SetVariable name="ForceLowerCase" value="false"/>
+  <SetVariable item="sqlserver" name="DatabaseType" value="true"/>
+  <SetVariable name="AdminPlatformEmail" value="{{ x3d_passport_admin_platform_email }}"/>
+  <SetVariable name="AdminPlatformPassword" value="{{ x3d_passport_admin_platform_password }}"/>
+  <SetVariable name="DSYWelcomePanel"/>
+  <SetVariable name="TARGET_PATH" value="{{ x3d_passport_target_path }}"/>
+  <SetVariable name="FinishPanel"/>
+</UserIntentions>

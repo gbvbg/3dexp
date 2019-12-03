@@ -1,0 +1,22 @@
+---
+- hosts: windows
+  gather_facts: false
+  tasks:
+    # todo: remove credentials after insallation?
+    - name: Save the network credentials required for the mapped drive
+      win_credential:
+        name: "{{ distro_server }}"
+        type: domain_password
+        username: "{{ distro_username }}"
+        secret: "{{ distro_secret }}"
+        state: present
+      vars:
+        # become is required to save and retrieve the credentials in the tasks
+        ansible_become: yes
+        ansible_become_method: runas
+        ansible_become_user: '{{ ansible_user }}'
+        ansible_become_pass: '{{ ansible_password }}'
+    - name: Make link to distros
+      win_command: cmd.exe /k mklink /D C:\distros {{ distro_unc_path }}
+      args:
+        chdir: c:\

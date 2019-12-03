@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserIntentions mediaName="CODE\win_b64\X3D_DASH.media" mediaVersion="421">
+  <SetVariable name="installEmbeddedServerJRE" value="true"/>
+  <SetVariable name="uwp_sqlserver_server" value="{{ uwp_sqlserver_server }}"/>
+  <SetVariable name="uwp_sqlserver_database_name" value="{{ uwp_sqlserver_database_name }}"/>
+  <SetVariable name="uwp_sqlserver_setup_database_user" value="{{ uwp_sqlserver_setup_database_user }}"/>
+  <SetVariable name="uwp_sqlserver_setup_database_password" value="{{ uwp_sqlserver_setup_database_password }}"/>
+  <SetVariable name="uwp_sqlserver_database_user" value="{{ uwp_sqlserver_database_user }}"/>
+  <SetVariable name="uwp_sqlserver_database_password" value="{{ uwp_sqlserver_database_password }}"/>
+  <SetVariable name="X3DCSMA_3DPassportURL" value="{{ x3d_csma_passport_url }}"/>
+  <SetVariable name="X3DCSMA_LicenceServer" value="{{ x3d_csma_licence_server }}"/>
+  <SetVariable name="X3DCSMA_3DDashboardURL" value="{{ x3d_csma_dashboard_url }}"/>
+  <SetVariable name="X3DCSMA_3DCompassURL" value="{{ x3d_csma_3dcompass_url }}"/>
+  <SetVariable name="X3DCSMA_6WTAGURL" value="{{ x3d_csma_6wtag_url }}"/>
+  <SetVariable name="X3DCSMA_SMTP_HOST" value="{{ x3d_csma_smtp_host }}"/>
+  <SetVariable name="X3DCSMA_SMTP_MAIL_SENDER" value="{{ x3d_csma_smtp_mail_sender }}"/>
+  <SetVariable name="TomEEConnectionPort" value="{{ x3d_dashboard_tomee_connection_port }}"/>
+  <SetVariable name="certificates_repository" value="{{ certificates_repository }}"/>
+  <SetVariable item="sqlserver" name="dsi_database_type" value="true"/>
+  <SetVariable name="dsi_domain_untrusted" value="{{ dsi_domain_untrusted }}"/>
+  <SetVariable name="dsi_uwaProxy_domainWhiteList" value=".*"/>
+  <SetVariable name="dsi_shared_dir" value="{{ dsi_shared_dir }}"/>
+  <SetVariable name="DSYWelcomePanel"/>
+  <SetVariable name="TARGET_PATH" value="{{ x3d_dashboard_target_path }}"/>
+  <SetVariable name="FinishPanel"/>
+</UserIntentions>

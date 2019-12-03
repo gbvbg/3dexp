@@ -1,0 +1,71 @@
+USE master;
+GO
+-- Create databases
+CREATE DATABASE {{ x3d_swym_social_db }} COLLATE SQL_Latin1_General_CP1_CI_AS;
+GO
+CREATE DATABASE {{ x3d_swym_media_db }} COLLATE SQL_Latin1_General_CP1_CI_AS;
+GO
+CREATE DATABASE {{ x3d_swym_widget_db }} COLLATE SQL_Latin1_General_CP1_CI_AS;
+GO
+-- Minimizing deadlock potential
+ALTER DATABASE {{ x3d_swym_social_db }} SET READ_COMMITTED_SNAPSHOT ON;
+GO
+ALTER DATABASE {{ x3d_swym_media_db }} SET READ_COMMITTED_SNAPSHOT ON;
+GO
+ALTER DATABASE {{ x3d_swym_widget_db }} SET READ_COMMITTED_SNAPSHOT ON;
+GO
+-- Create logins
+CREATE LOGIN {{ x3d_swym_user_login }} WITH PASSWORD = '{{ x3d_swym_user_password }}';
+GO
+CREATE LOGIN {{ x3d_swym_admin_login }} WITH PASSWORD = '{{ x3d_swym_admin_password }}';
+GO
+USE {{ x3d_swym_social_db }};
+GO
+-- Enable LEGACY_CARDINALITY_ESTIMATION setting
+ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = ON;
+GO
+-- Create users on correct DATABASE (after use) and with correct schema
+CREATE USER {{ x3d_swym_user }} FOR LOGIN {{ x3d_swym_user_login }} WITH DEFAULT_SCHEMA = {{ x3d_swym_social_schema }};
+GO
+CREATE USER {{ x3d_swym_admin }} FOR LOGIN {{ x3d_swym_admin_login }} WITH DEFAULT_SCHEMA = {{ x3d_swym_social_schema }};
+GO
+-- Create schema
+CREATE SCHEMA {{x3d_swym_social_schema }} AUTHORIZATION {{ x3d_swym_admin }};
+GO
+-- Grant access
+GRANT CREATE TABLE, ALTER, SELECT, INSERT, UPDATE, DELETE ON DATABASE::{{ x3d_swym_social_db }} TO {{ x3d_swym_admin }};
+GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::{{ x3d_swym_social_schema }} TO {{ x3d_swym_user }};
+GO
+USE {{ x3d_swym_media_db }};
+GO
+-- Create users on correct DATABASE (after use) and with correct schema
+CREATE USER {{ x3d_swym_user }} FOR LOGIN {{ x3d_swym_user_login }} WITH DEFAULT_SCHEMA = {{ x3d_swym_media_schema }};
+GO
+CREATE USER {{ x3d_swym_admin }} FOR LOGIN {{ x3d_swym_admin_login }} WITH DEFAULT_SCHEMA = {{ x3d_swym_media_schema }};
+GO
+-- Create schema
+CREATE SCHEMA {{ x3d_swym_media_schema }} AUTHORIZATION {{ x3d_swym_admin }};
+GO
+-- Grant access
+GRANT CREATE TABLE, ALTER, SELECT, INSERT, UPDATE, DELETE ON DATABASE::{{ x3d_swym_media_db }} TO {{ x3d_swym_admin }};
+GO
+GRANT CREATE TABLE ON DATABASE::{{ x3d_swym_media_db }} TO {{ x3d_swym_user }};
+GO
+GRANT SELECT, INSERT, UPDATE, DELETE, ALTER ON SCHEMA::{{ x3d_swym_media_schema }} TO {{ x3d_swym_user }};
+GO
+USE {{ x3d_swym_widget_db }};
+GO
+-- Create users on correct DATABASE (after use) and with correct schema
+CREATE USER {{ x3d_swym_user }} FOR LOGIN {{ x3d_swym_user_login }} WITH DEFAULT_SCHEMA = {{ x3d_swym_widget_schema }};
+GO
+CREATE USER {{ x3d_swym_admin }} FOR LOGIN {{ x3d_swym_admin_login }} WITH DEFAULT_SCHEMA = {{ x3d_swym_widget_schema }};
+GO
+-- Create schema
+CREATE SCHEMA {{ x3d_swym_widget_schema }} AUTHORIZATION {{ x3d_swym_admin }};
+GO
+-- Grant access
+GRANT CREATE TABLE, ALTER, SELECT, INSERT, UPDATE, DELETE ON DATABASE::{{ x3d_swym_widget_db }} TO {{ x3d_swym_admin }};
+GO
+GRANT SELECT, INSERT, UPDATE, DELETE, ALTER ON SCHEMA::{{ x3d_swym_widget_schema }} TO {{ x3d_swym_user }};
+GO

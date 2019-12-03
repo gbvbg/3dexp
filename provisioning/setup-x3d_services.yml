@@ -1,0 +1,74 @@
+- hosts: x3dpassport
+  gather_facts: False
+  roles:
+  - role: x3d_service
+    service: 3DPassport
+  tags: install_3dpassport
+- hosts: x3ddashboard
+  gather_facts: False
+  roles:
+  - role: x3d_service
+    service: 3DDashboard
+  tags: install_3ddashboard
+- hosts: x3dsearch
+  gather_facts: False
+  roles:
+  - role: x3d_service
+    service: FederatedSearchFoundation
+  tags: install_3dfedsearch
+
+- hosts: x3dspace
+  gather_facts: no
+  tasks:
+  - name: Install vcredist2012 (VC12)
+    win_chocolatey:
+      name: vcredist2012
+      state: present
+    tags: install_vcredist2012
+
+- hosts: x3dspace
+  gather_facts: False
+  roles:
+  - role: x3d_service
+    service: 3DSpace
+    tags: install_3dspace
+  #  todo: seems to be installation is ok, but return code is failed
+  - role: x3d_service
+    service: 3DSpaceIndex
+    is_copy_fragment: false
+    tags: install_3dspace_index
+  # tasks:
+  # - debug:
+  #     msg: 'todo: 3DSpaceIndex installation is not implemented. Please install manualy.'
+  #   tags: install_3dspace_index
+
+
+- hosts: x3dswym
+  gather_facts: False
+  roles:
+
+  - role: x3d_service
+    service: EXALEAD_CloudView
+    is_copy_fragment: false
+    media_volume: 2
+    tags: install_exalead_cv
+
+  - role: x3d_service
+    service: 3DSwym
+    media_volume: 2
+    tags: install_3dswym
+
+- hosts: x3dcomment
+  gather_facts: False
+  roles:
+  - role: x3d_service
+    service: 3DComment
+    media_volume: 2
+    tags: install_comment
+- hosts: x3dnotification
+  gather_facts: False
+  roles:
+  - role: x3d_service
+    service: 3DNotification
+    media_volume: 2
+    tags: install_notification

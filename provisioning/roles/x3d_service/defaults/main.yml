@@ -1,0 +1,225 @@
+---
+is_copy_fragment: true
+media_volume: 1
+install_root: D:\DassaultSystemes
+database_url: localhost\TEST
+certificates_repository: C:\SSL
+domain: mydomain
+
+# X3DCSMA_3DPassportURL
+x3d_csma_passport_url: "https://3dpassport.{{ domain }}:543/3dpassport"
+# X3DCSMA_3DCompassURL
+x3d_csma_3dcompass_url: "https://3dspace.{{ domain }}:544/3dspace"
+# X3DCSMA_6WTAGURL
+x3d_csma_6wtag_url: "https://3dspace.{{domain}}:544/3dspace"
+# X3DCSMA_3DSpaceURL
+x3d_csma_space_url: "https://3dspace.{{domain}}:544/3dspace"
+
+x3d_csma_dashboard_url: "https://3ddashboard.{{domain}}:545/3ddashboard"
+# X3DCSMA_FEDERATED_SEARCH
+x3d_csma_federated_search_url: "https://3dsearch.{{domain}}:546/federated"
+
+x3d_csma_swym_url: "https://3dswym.{{domain}}:547/3dswym"
+# X3DCSMA_3DCommentURL
+x3d_csma_comment_url: "https://3dcomment.{{domain}}:548/3dcomment"
+# X3DCSMA_3DNotificationURL
+x3d_csma_notification_url: "https://3dnotification.{{domain}}:549/3dnotification"
+# X3DCSMA_FULL_TEXT_SEARCH
+x3d_csma_full_text_search_url: "http://3dspace.{{domain}}:19000"
+# X3DCSMA_3DSWYM_FULL_TEXT_SEARCH
+x3d_swym_full_text_search_url: "http://3dswym.{{ domain }}:29000"
+# X3DCSMA_SMTP_HOST
+x3d_csma_smtp_host: localhost
+# X3DCSMA_SMTP_MAIL_SENDER
+x3d_csma_smtp_mail_sender: admin_platform@localhost
+
+
+# installEmbeddedServerJRE
+x3dpassport_installEmbeddedServerJRE: "true"
+# TomEEConnectionPort
+x3d_passport_tomee_connection_port: 8080
+
+# PASS_MSSQL_SQLURL_HOST_AND_PORT
+x3d_passport_db_url: "{{ database_url }}"
+
+# PASS_MSSQL_SQLURL_SCHEMA
+x3d_passport_schema: passdb
+
+# PASS_MSSQL_SQLUserAdmin
+x3d_passport_admin_login: x3dpassadmin
+
+# PASS_MSSQL_SQLPasswordAdmin
+x3d_passport_admin_password: Passport#1
+
+# PASS_MSSQL_SQLUser
+x3d_passport_user: x3dpass
+
+# PASS_MSSQL_SQLPassword
+x3d_passport_user_password: Passport#1
+
+# PASS_MSSQL_SQLURLCas_HOST_AND_PORT
+x3d_passport_tokens_db_url: "{{ database_url }}"
+
+# PASS_MSSQL_SQLURLCas_SCHEMA
+x3d_passport_tokens_schema: passtkdb
+
+# PASS_MSSQL_SQLUserCas
+x3d_passport_tokens_user: x3dpasstokens
+
+# PASS_MSSQL_SQLPasswordCas
+x3d_passport_tokens_user_password: Passport#1
+
+# PASS_MSSQL_DatabaseConnectionCheck
+x3dpassport_PASS_MSSQL_DatabaseConnectionCheck: true
+
+# ForceLowerCase
+x3dpassport_ForceLowerCase: false
+
+# DatabaseType?oracle
+x3dpassport_DatabaseType_oracle: false
+
+# DatabaseType?sqlserver
+x3dpassport_DatabaseType_sqlserver: true
+
+# AdminPlatformEmail
+x3d_passport_admin_platform_email: admin_platform@localhost
+
+# AdminPlatformPassword
+x3d_passport_admin_platform_password: Passport#1
+
+# TARGET_PATH
+x3d_passport_target_path: '{{ install_root }}\R2019x\3DPassport'
+
+#
+# 3D dashboard
+#
+
+uwp_sqlserver_server: "{{ database_url }}"
+
+uwp_sqlserver_database_name: "dashdb"
+
+uwp_sqlserver_setup_database_user: "x3ddashadmin"
+
+uwp_sqlserver_setup_database_password: "Passport#1"
+
+uwp_sqlserver_database_user: "x3ddash"
+
+uwp_sqlserver_database_password: "Passport#1"
+
+# 3D dashboard TomEEConnectionPort
+x3d_dashboard_tomee_connection_port: "9000"
+
+dsi_domain_untrusted: "untrusted.3ddashboard.{{domain}}"
+
+dsi_shared_dir: '{{ install_root }}\3DDashboardData'
+
+x3d_dashboard_target_path: '{{ install_root }}\\R2019x\3DDashboard'
+
+dsi_uwaProxy_domain_white_list: ".*"
+
+
+#
+# FederatedSearchFoundation
+#
+x3d_fedsearch_tomee_connection_port: 9010
+
+x3d_fedsearch_target_path: '{{ install_root }}\R2019x\FederatedSearchFoundation'
+
+#
+# 3DSpace
+#
+
+x3d_space_db_url: "{{ database_url }}"
+x3d_space_db: spacedb
+x3d_space_db_file_path: '{{ install_root }}\3DEXP_DB'
+x3d_space_db_login: m1
+x3d_space_db_user: "{{ x3d_space_db_login }}"
+x3d_space_db_user_password: 'Passport#1'
+x3d_space_db_schema: "{{ x3d_space_db }}"
+x3d_space_data_path: '{{ install_root }}\3DSpaceData'
+x3d_space_target_path: '{{ install_root }}\R2019x\3DSpace'
+X3DCSMA_creator_password: "{{ x3d_space_db_user_password }}"
+X3DCSMA_administor_password: "{{ x3d_space_db_user_password }}"
+x3d_space_tomee_connection_port: 9080
+X3DCSMA_ENOVIAV5: ""
+#
+# 3D swym
+#
+
+#
+# 3DComment
+#
+SOCIAL_SHARED_DIR: '{{ install_root }}\3DCommentData'
+SOCIAL_LOG_DIR: '{{ install_root }}\3DComment\3DCommentLog'
+SOCIAL_TMP_DIR: 'C:\Users\{{ user }}\AppData\Local\Temp\Dassault Systemes\3DComment'
+x3d_comment_tomee_connection_port: 8083
+x3d_comment_db_url: "{{ database_url }}"
+x3d_comment_db: x3dcomment
+x3d_comment_user_login: x3ds
+x3d_comment_admin_login: x3ds_admin
+x3d_comment_user_password: 'Passport#1'
+x3d_comment_admin_password: "{{ x3d_comment_user_password }}"
+x3d_comment_user: "{{ x3d_comment_user_login }}"
+x3d_comment_admin: "{{ x3d_comment_admin_login }}"
+x3d_comment_schema: "{{ x3d_comment_db }}"
+x3d_comment_target_path: '{{ install_root }}\R2019x\3DComment'
+
+#
+# 3DNotification
+#
+NODEINFRACONF_DIR: '{{ install_root }}\3DNotificationData'
+NODEINFRALOG_DIR: '{{ install_root }}\3DNotification\3DNotificationLogs'
+NODEINFRATMP_DIR: 'C:\Users\{{ user }}\AppData\Local\Temp\Dassault Systemes\3DNotification'
+x3d_notification_db_url: "{{ database_url }}"
+x3d_notification_db: x3dnotification
+x3d_notification_user_login: x3ds
+x3d_notification_admin_login: x3ds_admin
+x3d_notification_user_password: 'Passport#1'
+x3d_notification_admin_password: "{{ x3d_notification_user_password }}"
+x3d_notification_user: "{{ x3d_notification_user_login }}"
+x3d_notification_admin: "{{ x3d_notification_admin_login }}"
+x3d_notification_schema: "{{ x3d_notification_db }}"
+x3d_notification_nodebackend_port: 8089
+x3d_notification_target_path: '{{ install_root }}\R2019x\3DNotification'
+
+
+#
+# Full text search
+# 3DSpace Index
+FullCloud_AdminPassword: Passport#1
+x3d_csma_full_text_search_target_path: '{{ install_root }}\R2019x\3DSpaceIndex'
+
+
+#
+# EXALEAD_CloudView
+#
+x3d_exaled_cloudview_target_path: '{{ install_root }}\R2019x\CloudView'
+
+
+#
+# 3DSwym
+#
+x3d_swym_shared_dir: '{{ install_root }}\3DSwymData'
+x3d_swym_log_dir: '{{ install_root }}\R2019x\3DSwym\3DSwymLog'
+x3d_swym_tmp_dir: 'C:\Users\{{ user }}\AppData\Local\Temp\Dassault Systemes\3DSwym'
+x3d_swym_db_url: "{{ database_url }}"
+x3d_swym_social_db: x3dswym_social
+x3d_swym_media_db: x3dswym_media
+x3d_swym_widget_db: x3dswym_widget
+
+x3d_swym_user_login: x3ds
+x3d_swym_admin_login: x3ds_admin
+x3d_swym_user_password: 'Passport#1'
+x3d_swym_admin_password: "{{ x3d_swym_user_password }}"
+x3d_swym_user: "{{ x3d_swym_user_login }}"
+x3d_swym_admin: "{{ x3d_swym_admin_login }}"
+
+x3d_swym_admin_6wtag_user: admin_6wtag
+x3d_swym_admin_6wtag_password: Passport#1
+x3d_swym_tomee_connection_port: 8083
+# CV_ADMIN_PASSWORD
+x3d_swym_cloudview_admin_password: Passport#1
+x3d_swym_target_path: '{{ install_root }}\R2019x\3DSwym'
+x3d_swym_foundation_install: 'true'
+x3d_swym_video_converter_install: 'true'
+x3d_swym_index_install: 'true'

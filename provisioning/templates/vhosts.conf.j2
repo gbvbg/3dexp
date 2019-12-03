@@ -1,0 +1,24 @@
+{% for ep in  endpoints|dict2items  %}
+Listen  {{ ep.value }}
+
+<VirtualHost {{ ep.key }}.{{ domain }}:{{ ep.value }}>
+
+ServerName {{ ep.key }}.{{ domain }}
+ServerAlias {{ ep.key }}.{{ domain }}
+
+ErrorLog logs/{{ ep.key }}_error.log
+TransferLog logs/{{ ep.key }}_access.log
+LogLevel warn
+
+SSLEngine on
+SSLProxyEngine on
+
+SSLCertificateFile "{{ certificates_repository }}\{{ ep.key }}.{{ domain }}.crt"
+SSLCertificateKeyFile "{{ certificates_repository }}\{{ ep.key }}.{{ domain }}.pem"
+
+
+include conf/{{ 'federated' if ep.key == '3dsearch' else ep.key }}_httpd_fragment.conf
+
+</VirtualHost>
+
+{% endfor %}

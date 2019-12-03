@@ -1,0 +1,34 @@
+---
+- hosts: host14
+  gather_facts: false
+  tasks:
+  - name: copy fragments
+    win_copy:
+      src: "{{ item }}"
+      dest: \\host13\C$\Apache24\conf\
+      remote_src: yes
+    loop:
+      - "{{ target_path }}\\3DPassport\\win_b64\\templates\\3DPassport_httpd_fragment.conf"
+      - "{{ target_path }}\\3DSpace\\win_b64\\templates\\3DSpace_httpd_fragment.conf"
+- hosts: host13
+  gather_facts: false
+  tasks:
+  - name: copy fragments
+    win_copy:
+      src: "{{ item }}"
+      dest: \\host13\C$\Apache24\conf\
+      remote_src: yes
+    loop:
+      - "{{ target_path }}\\3DComment\\win_b64\\templates\\3DComment_httpd_fragment.conf"
+      - "{{ target_path }}\\3DDashboard\\win_b64\\templates\\3DDashboard_httpd_fragment.conf"
+      - "{{ target_path }}\\3DNotification\\win_b64\\templates\\3DNotification_httpd_fragment.conf"
+      - "{{ target_path }}\\3DSwym\\win_b64\\templates\\3DSwym_httpd_fragment.conf"
+      - "{{ target_path }}\\FederatedSearchFoundation\\win_b64\\templates\\federated_httpd_fragment.conf"
+
+- hosts: httpd
+  gather_facts: false
+  tasks:
+  - name: restart Apache24
+    win_service:
+      name: Apache24
+      state: restarted

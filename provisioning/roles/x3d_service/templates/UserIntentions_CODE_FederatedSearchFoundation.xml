@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserIntentions mediaName="CODE\win_b64\X3D_SEAR.media" mediaVersion="421">
+  <SetVariable name="installEmbeddedServerJRE" value="true"/>
+  <SetVariable name="TomEEConnectionPort" value="{{ x3d_fedsearch_tomee_connection_port }}"/>
+  <SetVariable name="X3DCSMA_3DPassportURL" value="{{ x3d_csma_passport_url }}"/>
+  <SetVariable name="X3DCSMA_FEDERATED_SEARCH" value="{{ x3d_csma_federated_search_url }}"/>
+  <SetVariable name="X3DCSMA_3DSpaceURL" value="{{ x3d_csma_space_url }}"/>
+  <SetVariable name="X3DCSMA_3DSWYMURL" value="{{ x3d_csma_swym_url }}"/>
+  <SetVariable name="certificates_repository" value="{{ certificates_repository }}"/>
+  <SetVariable name="DSYWelcomePanel"/>
+  <SetVariable name="TARGET_PATH" value="{{ x3d_fedsearch_target_path }}"/>
+  <SetVariable name="FinishPanel"/>
+</UserIntentions>

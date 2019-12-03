@@ -1,0 +1,13 @@
+---
+  - import_playbook: setup-storage.yml
+  - import_playbook: setup-domain.yml
+  - import_playbook: setup-mssql.yml
+  - import_playbook: setup-databases.yml
+  - import_playbook: setup-distro.yml
+  - import_playbook: generate-selfsigned-certs.yml
+  - import_playbook: place-certificates.yml
+  - import_playbook: setup-x3d_services.yml
+  - import_playbook: setup-httpd.yml
+  # todo: host names are hard coded!!!
+  - import_playbook: copy_httpd_fragments.yml # and restart Apache httpd
+  - import_playbook: register-3dspace.yml # and config License Server

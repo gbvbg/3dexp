@@ -1,0 +1,6 @@
+
+distro
+.vagrant
+provisioning/gbykov_pass.yml
+*.vdi
+provisioning/group_vars/all/vault

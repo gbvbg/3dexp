@@ -1,0 +1,50 @@
+---
+user: vagrant
+user_password: vagrant
+domain: domain.local
+domain_admin_user: vagrant@domain.local
+domain_admin_password: password123!
+safe_mode_password: password123!
+
+endpoints:
+  3dpassport: 543
+  3dspace: 544
+  3ddashboard: 545
+  3dsearch: 546
+  3dswym: 547
+  3dcomment: 548
+  3dnotification: 549
+
+certificates_repository: D:\SSL
+install_root: D:\DassaultSystemes
+target_path: '{{ install_root }}\R2019x'
+
+# uncomment the following lines and set correct values for variables
+# distro_server: _ip_address_of_cifs_server
+# distro_path: \Unziped\Distro\of\3DEXPERIENCE
+distro_unc_path: \\{{ distro_server }}{{ distro_path }}
+distro_username: "{{ vault_distro_username }}"
+distro_secret: "{{ vault_distro_secret }}"
+
+x3d_mssql_instance_name: TEST
+x3d_mssql_port: 1433
+database_url: "{{ groups['database'][0] }}.{{ domain }}\\{{ x3d_mssql_instance_name }}"
+
+# uncomment the following lines and set correct values for variables
+# dsls_server_ip_port: "_ip_adress_of_license_server_:4085"
+
+x3d_csma_passport_url: "https://3dpassport.{{ domain }}:{{ endpoints['3dpassport'] }}/3dpassport"
+x3d_csma_dashboard_url: "https://3ddashboard.{{ domain }}:{{ endpoints['3ddashboard'] }}/3ddashboard"
+x3d_csma_federated_search_url: "https://3dsearch.{{ domain }}:{{ endpoints['3dsearch'] }}/federated"
+x3d_csma_space_url:  "https://3dspace.{{ domain }}:{{ endpoints['3dspace'] }}/3dspace"
+x3d_csma_3dcompass_url: "https://3dspace.{{ domain }}:{{ endpoints['3dspace'] }}/3dspace"
+x3d_csma_6wtag_url: "https://3dspace.{{ domain }}:{{ endpoints['3dspace'] }}/3dspace"
+x3d_csma_swym_url: "https://3dswym.{{ domain }}:{{ endpoints['3dswym'] }}/3dswym"
+x3d_csma_comment_url: "https://3dcomment.{{ domain }}:{{ endpoints['3dcomment'] }}/3dcomment"
+x3d_csma_notification_url: "https://3dnotification.{{ domain }}:{{ endpoints['3dnotification'] }}/3dnotification"
+x3d_csma_full_text_search_url: "http://host14.{{domain}}:19000"
+# uncomment the following lines and set correct values for variables
+# x3d_csma_smtp_host: mail.domain.io
+# x3d_csma_smtp_mail_sender: admin_platform@domain.io
+# x3d_passport_admin_platform_email: admin_platform@domain.io
+x3d_csma_licence_server: "https://{{ dsls_server_ip_port }}"

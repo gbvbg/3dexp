@@ -1,0 +1,45 @@
+---
+  - name: Place {{ service }} DDL scripts
+    win_template:
+      src: create_{{ service }}_db.sql.j2
+      dest: "c:\\Users\\{{ user }}\\Downloads\\create_{{ service }}_db.sql"
+  - name: Test if {{ service }} exists
+    vars:
+      service_db: "{{ vars['x3d_' + service + '_db'] }}"
+    win_shell: sqlcmd -Q "select name from sys.databases where name='{{ service_db }}'" | find "{{ service_db }}"
+    args:
+      executable: cmd
+    register: database_exists
+    ignore_errors: yes
+
+  - debug:
+      var: force_db_creation
+      verbosity: 3
+  - debug:
+      var: database_exists.rc
+      verbosity: 3
+
+  - name: Drop {{ service }} database
+    vars:
+      service_db: "{{ vars['x3d_' + service + '_db'] }}"
+    win_shell: |-
+      sqlcmd -Q "alter database {{ service_db }} set single_user with rollback immediate;
+      GO
+      DROP DATABASE {{ service_db }};
+      GO"
+    args:
+      executable: cmd
+    when: database_exists.rc == 0 and force_db_creation|bool == true
+
+  - name: Create {{ service }} db file store_location
+    vars:
+      file_path: "{{ vars['x3d_' + service + '_db_file_path'] | default('None') }}"
+    win_file:
+      path: "{{ file_path }}"
+      state: directory
+    when: file_path != 'None'
+  - name: Create {{ service }} database
+    win_command: "sqlcmd -i create_{{ service }}_db.sql -o create_{{ service }}_db.out"
+    args:
+      chdir: "c:\\Users\\{{ user }}\\Downloads\\"
+    when: database_exists.rc == 1 or force_db_creation|bool == true
